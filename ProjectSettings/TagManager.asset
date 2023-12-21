@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ball
+  - Green_Score
+  - Orange_Score
+  - Pink_Score
+  - Red_Score
+  - Lateral_Border
+  - Top_Border
+  - Blue_Score
+  - Bot_Border
   layers:
   - Default
   - TransparentFX
