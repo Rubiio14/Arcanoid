@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class Ball_Behaviour : MonoBehaviour
 {
+    
+    [SerializeField]
+    Brick_Behaviour brick_live;
+    public int lifes = 3;
     [SerializeField]
     float ball_speed = 3f;
     [SerializeField]
     Vector3 direction;
     [SerializeField]
     Score scoreboard;
-
+    public bool stop = false;
 
     void Start()
     {
@@ -19,7 +23,11 @@ public class Ball_Behaviour : MonoBehaviour
 
     void Update()
     {
-        transform.position += direction * Time.deltaTime * ball_speed;
+        if (stop == false)
+        {
+            transform.position += direction * Time.deltaTime * ball_speed;
+        }
+        
     }
     void OnCollisionEnter2D(Collision2D col)
     {
@@ -36,35 +44,52 @@ public class Ball_Behaviour : MonoBehaviour
             //Franja_azul
             Choque();
             scoreboard.Blue_hit();
-            Destroy(col.gameObject);
+            if (brick_live.life == 0)
+            {
+                Destroy(col.gameObject);
+            }
+            
         }
         if (col.gameObject.CompareTag("Green_Score"))
         {
             //Franja_verde
             Choque();
             scoreboard.Green_hit();
-            Destroy(col.gameObject);
+            if (brick_live.life == 0)
+            {
+                Destroy(col.gameObject);
+            }
+
         }
         if (col.gameObject.CompareTag("Orange_Score"))
         {
             //Franja_naranja
             Choque();
             scoreboard.Orange_hit();
-            Destroy(col.gameObject);
+            if (brick_live.life == 0)
+            {
+                Destroy(col.gameObject);
+            }
         }
         if (col.gameObject.CompareTag("Pink_Score"))
         {
             //Franja_rosa
             Choque();
             scoreboard.Pink_hit();
-            Destroy(col.gameObject);
+            if (brick_live.life == 0)
+            {
+                Destroy(col.gameObject);
+            }
         }
         if (col.gameObject.CompareTag("Red_Score"))
         {
             //Franja_Roja
             Choque();
             scoreboard.Red_hit();
-            Destroy(col.gameObject);
+            if (brick_live.life == 0)
+            {
+                Destroy(col.gameObject);
+            }
         }
         if (col.gameObject.CompareTag("Lateral_Border"))
         {
@@ -82,8 +107,10 @@ public class Ball_Behaviour : MonoBehaviour
         }
         if (col.gameObject.CompareTag("Bot_Border"))
         {
-            //Reseteo
-            scoreboard.ResetScore();
+            //Reseta vidas
+            lifes -= 1;
+            scoreboard.UpdateScoreText();
+            //scoreboard.ResetScore();
             ball_speed = 3f;
             transform.position = new Vector3(0,-1,0);
         }

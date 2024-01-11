@@ -10,20 +10,25 @@ public class Player_Behaviour : MonoBehaviour
     Vector3 direction;
     [SerializeField]
     private float Player_Speed;
-
+    public bool stop = false;
 
     void Update()
     {
         //Movimiento del juagdor
-        if (Input.GetKey(buttonRight))
+        if (stop == false)
         {
-            direction = Vector3.right;
-            transform.position += direction * Time.deltaTime * Player_Speed;
+            if (Input.GetKey(buttonRight))
+            {
+                direction = Vector3.right;
+                transform.position += direction * Time.deltaTime * Player_Speed;
+            }
+            else if(Input.GetKey(buttonLeft))
+            {
+                direction = Vector3.left;
+                transform.position += direction * Time.deltaTime * Player_Speed;
+            }
         }
-        else if(Input.GetKey(buttonLeft))
-        {
-            direction = Vector3.left;
-            transform.position += direction * Time.deltaTime * Player_Speed;
-        }
+        
+       
     }
 }

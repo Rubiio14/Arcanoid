@@ -4,9 +4,13 @@ using UnityEngine;
 using TMPro;
 public class Score : MonoBehaviour
 {
+    [SerializeField]
+    Ball_Behaviour ball;
     int Scorepoints;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI lifeText;
     public void ResetScore()
+    
     {
         Scorepoints = 0;
         UpdateScoreText();
@@ -36,8 +40,10 @@ public class Score : MonoBehaviour
         Scorepoints += 50;
         UpdateScoreText();
     }
-    void UpdateScoreText()
+
+    public void UpdateScoreText()
     {
-        scoreText.text = Scorepoints.ToString();
+        scoreText.text = Scorepoints.ToString("0000");
+        lifeText.text = "Vidas : " + ball.lifes.ToString();
     }
 }
